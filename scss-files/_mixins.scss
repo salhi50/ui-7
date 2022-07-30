@@ -1,0 +1,177 @@
+/* mixins list */
+
+// media queries
+// 
+@mixin media($type) {
+    // mobile screes
+    @if $type == 'mobile' {
+        @media screen and (max-width: 768px) {
+            @content;
+        }
+    }
+    // tablet and small screens
+    @else if $type == 'small' {
+        @media screen and (min-width: 768px) {
+            @content;
+        }
+    }
+    // medium screens
+    @else if $type == 'medium' {
+        @media screen and (min-width: 992px) {
+            @content;
+        }
+    }
+    // large
+    @else if $type == 'large' {
+        @media screen and (min-width: 1200px) {
+            @content;
+        }
+    }
+    // x-large
+    @else if $type == 'x-large' {
+        @media screen and (min-width: 1400px) {
+            @content;
+        }
+    }
+}
+
+// hover info
+// 
+@mixin hoverInfo(
+    // popup variables
+    // 
+    $pop--position,
+    $pop--text-size,
+    $pop--width,
+    $pop--pd-x,
+    $pop--pd-y,
+    $pop-bg,
+    $pop-color,
+    $pop-rad,
+    $pop--gap,
+    // border variables
+    // 
+    $border--size
+) {
+    // default properties
+    // 
+    background-color: $pop-bg;
+    color: $pop-color;
+    padding: $pop--pd-y $pop--pd-x;
+    border-radius: $pop-rad;
+    min-width: $pop--width;
+    font-size: $pop--text-size;
+    position: absolute;
+    max-width: 100%;
+    z-index: 5;
+    text-align: center;
+    // make the first letter capital
+    // 
+    &::first-letter{
+        text-transform: capitalize;
+    }
+
+// top position condition
+// 
+@if $pop--position == 'top' {
+    top: $pop--gap;
+    transform: translateX(-50%) translateY(-100%);
+    left: 50%;
+    &::before{
+        position: absolute;
+        border: {
+            top: $border--size solid $pop-bg;
+            left: $border--size solid transparent;
+            right: $border--size solid transparent;
+            bottom: $border--size solid transparent;
+        };
+        bottom: $border--size * -1;
+        left: 50%;
+        transform: translateX(-50%);
+        content: '';
+        margin-bottom: $border--size * -1;
+    }
+}
+// bottom position condition
+// 
+@else if $pop--position == 'bottom' {
+    // transform property
+    // 
+    bottom: $pop--gap;
+    transform: translateX(-50%) translateY(100%);
+    left: 50%;
+    // before 
+    // 
+    &::before{
+        position: absolute;
+        border: {
+            top: $border--size solid transparent;
+            left: $border--size solid transparent;
+            right: $border--size solid transparent;
+            bottom: $border--size solid $pop-bg;
+        };
+        top: $border--size * -1;
+        left: 50%;
+        transform: translateX(-50%);
+        content: '';
+        margin-top: $border--size * -1;
+    } 
+}
+// left position
+// 
+@else if $pop--position == 'left' {
+    left: $pop--gap;
+    transform: translateX(-100%) translateY(-50%);
+    top: 50%;
+    &::before{
+        position: absolute;
+        border: {
+            top: $border--size solid transparent;
+            right: $border--size solid transparent;
+            left: $border--size solid $pop-bg;
+            bottom: $border--size solid transparent;
+        };
+        right: $border--size * -1;
+        top: 50%;
+        transform: translateY(-50%);
+        content: '';
+        margin-right: $border--size * -1;
+    } 
+}
+// right position
+// 
+@else if $pop--position == 'right' {
+    right: $pop--gap;
+    transform: translateX(100%) translateY(-50%);
+    top: 50%;
+    &::before{
+        position: absolute;
+        border: {
+            top: $border--size solid transparent;
+            left: $border--size solid transparent;
+            right: $border--size solid $pop-bg;
+            bottom: $border--size solid transparent;
+        };
+        left: $border--size * -1;
+        top: 50%;
+        transform: translateY(-50%);
+        content: '';
+        margin-left: $border--size * -1;
+    } 
+}
+// set the display to none if the input not valid
+// 
+@else {
+    &{
+        display: none;
+    }
+}
+}
+
+// animation keyframes
+// 
+@mixin animation($name) {
+    @keyframes #{$name} {
+        @content;
+    }
+}

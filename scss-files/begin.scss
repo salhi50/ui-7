@@ -1,0 +1,201 @@
+@import 'variables';
+@import 'mixins';
+@import 'functions';
+html {
+    @media screen and (max-width: 768px){
+        font-size: 15px;
+    }
+    @media screen and (max-width: 400px) {
+        font-size: 12px !important;
+    }
+}
+
+body{
+    background-color: $body-bg;
+}
+
+// aside content
+// 
+main {
+    grid-template-columns: auto 1fr;
+    @include media(mobile) {grid-template-columns: 1fr;}
+    aside {
+        min-height: 100vh;
+        background-color: $black-color;
+        color: $grey-icon;
+        @include media(mobile){display: none;}
+    }
+    .aside--icon{
+        font-size: rem(23);
+    }
+    .aside--subtitle{
+        font-size: $font-small !important;
+        margin-top: rem(6);
+    }
+    .aside--list-item{
+        padding: rem(12);
+        cursor: pointer;
+    }
+    .aside--logo{
+        min-height: rem(60);
+        background-color: $main-color;
+    }
+    .aside--list-item.active{
+        color: #fff !important;
+        background-color: #1a1d22;
+        font-weight: 500;
+    }
+    .nav--links{
+        @include media(media) {display: none;}
+    }
+    .nav--links a{
+        color: $grey-color;
+        font-size: $font-medium;
+        transform: translateY(2px);
+    }
+    .nav--links a.active{color: $main-color;font-weight: 500;}
+    .nav--profil-btn{
+        border-radius: rem(30);
+        padding: rem(8) rem(20) !important;
+        font-size: $font-medium-2;
+        background-color: #efefef;
+    }
+    header{
+        box-shadow: 0 3px 5px rgba(0,0,0,.07);
+        @include media(mobile){
+            padding: rem(15);
+        }
+        @include media(small){
+            padding: rem(15);
+        }
+        @include media(medium){
+            padding: rem(20);
+        }
+        background-color: #fff;
+    }
+
+    .jobs{
+        padding: rem(20);
+        background-color: $body-bg;
+        gap: rem(30);
+        @include media(mobile) {
+            grid-template-columns: 1fr;
+            grid-auto-rows: 1fr;
+            margin: rem(20) 0;
+        }
+        @include media(small) {
+            grid-template-columns: repeat(2,1fr);
+        }
+        @include media(medium) {
+            grid-template-columns: repeat(3,1fr);
+        }
+        @include media(large) {
+            grid-template-columns: repeat(4,1fr);
+        }
+    }
+    .jobs--box{
+        background-color: #fff;
+        box-shadow: 0 3px 8px rgba(0,0,0,.07);
+        cursor: pointer;
+    }
+    .jobs--add-icon{
+        font-size: rem(40);
+        color: $grey-icon;
+    }
+    .jobs--add-item{
+        border: 2px dashed $grey-color;
+        border-radius: rem(2);
+        cursor: pointer;
+    }   
+    .jobs--up-half{
+        background-color: $light-box-bg;
+        min-height: rem(100);
+    }
+    .jobs--box-icon{
+        font-size: rem(45);
+        color: #424242;
+    }
+    .jobs--box-heading{
+        font-size: rem(16);
+        font-weight: 400;
+    }
+    .jobs--down-half{
+        padding: rem(17);
+        border-bottom: 1px solid #ededed;
+    }
+    .jobs--box-company{
+        color: $grey-color;
+        font-size: $font-small;
+    }
+    .jobs--add-subtitle{
+        color: $grey-icon;
+        font-size: $font-medium;
+    }
+    .jobs--down-box{
+        padding: rem(10);
+    }
+    .jobs--box-bars-icon{
+        font-size: rem(16);
+    }
+    .jobs--box-bars{
+        padding-left: rem(10);
+        border-left: 1px solid #ededed;
+        position: relative;
+        cursor: pointer;
+        &:hover{
+            color: $main-color !important;
+        }
+        &:hover .jobs--requirements{
+            opacity: 1;
+            visibility: visible
+        }
+    }
+    .jobs--requirements{
+        @include hoverInfo(bottom, rem(13), 270px, rem(10), rem(10), $black-color, #fff, rem(5), -15px, rem(7));
+        @include media(mobile) {display: none;}
+        @include media(small) {display: none;}
+        @include media(medium) {display: flex;}
+        opacity: 0;
+        visibility: 0;
+        transition: opacity .2s ease-in,
+                    visibility .2s ease-in                    ;
+    };
+    .jobs--req-btn{
+        font-size: rem(12);
+        border-radius: rem(30);
+        padding: rem(4) rem(15);
+        margin: rem(4);
+        background-color: lighten($black-color,20%);
+        color: #fff;
+    }
+    .jobs--box-date-info{
+        color: $grey-color;
+        font-size: $font-small;
+    }
+    .jobs--box-arrow-icon{
+        font-size: rem(15);
+        color: $grey-icon;
+    }
+    .jobs--circle-progress{
+        width: rem(120);
+        height: rem(120);
+        border: rem(6) solid #e5e5e5;
+        border-radius: 50%;
+        position: relative;
+        &::before{
+            position: absolute;
+            content: '';
+            width: calc(100% + rem(12));
+            height: calc(100% + rem(12));
+            border-radius: 50%;
+            border: rem(6) solid $blue-color;
+            border-left-color: transparent;
+            transform: rotate(60deg);
+            z-index: 8;
+        }
+    }
+    .jobs--circle-subtitle{
+        color: $grey-color;
+        font-size: $font-small;
+    }
+}
